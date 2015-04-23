@@ -10,30 +10,32 @@ angular.module('smoothie-directive', [])
                 background: '@',
                 lineColor:  '@',
                 lineWidth:  '@',
-                labelColor: '@'
+                labelColor: '@',
+                min:        '@',
+                max:        '@'
             },
 
             controller: function($scope, $element) {
                 this.canvas = $element[0];
-				
+
 				var options = {
-                    grid: { 
-                        strokeStyle: $scope.lineColor || 'transparent', 
+                    grid: {
+                        strokeStyle: $scope.lineColor || 'transparent',
                         fillStyle: $scope.background || 'transparent'
                     },
-                    labels: { 
-                        fillStyle: $scope.labelColor || 'transparent' 
+                    labels: {
+                        fillStyle: $scope.labelColor || 'transparent'
                     }
                 };
-				
+
 				if($scope.min !== null && $scope.min !== undefined) {
 					options.minValue = $scope.min;
 				}
-				
+
 				if($scope.max !== null && $scope.max !== undefined) {
 					options.maxValue = $scope.max;
 				}
-				
+
                 this.smoothie = new SmoothieChart(options);
             }
         };
