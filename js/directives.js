@@ -15,8 +15,8 @@ angular.module('smoothie-directive', [])
 
             controller: function($scope, $element) {
                 this.canvas = $element[0];
-
-                this.smoothie = new SmoothieChart({
+				
+				var options = {
                     grid: { 
                         strokeStyle: $scope.lineColor || 'transparent', 
                         fillStyle: $scope.background || 'transparent'
@@ -24,7 +24,17 @@ angular.module('smoothie-directive', [])
                     labels: { 
                         fillStyle: $scope.labelColor || 'transparent' 
                     }
-                });
+                };
+				
+				if($scope.min !== null && $scope.min !== undefined) {
+					options.minValue = $scope.min;
+				}
+				
+				if($scope.max !== null && $scope.max !== undefined) {
+					options.maxValue = $scope.max;
+				}
+				
+                this.smoothie = new SmoothieChart(options);
             }
         };
     })
